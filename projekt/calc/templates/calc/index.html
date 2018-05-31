@@ -1,0 +1,76 @@
+<center>
+<script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+<div lang="latex">
+S=\int \frac{1}{2\kappa^2}A(\phi)R-\frac{1}{2}B(\phi)(\nabla\phi)^2-V(\phi)
+</div>
+<form method=post action="">{% csrf_token %}
+<table>
+	<tr>
+    <td align="right">Plot title</td>
+    <td>{{ form.Title }}</td>
+    <td>{{ form.Title.errors }}</td>
+    </tr>
+	<tr>
+    <td align="right">A(x)=</td>
+    <td>{{ form.A }}</td>
+    <td>{{ form.A.errors }}</td>
+    </tr>
+	<tr>
+    <td align="right">B(x)=</td>
+    <td>{{ form.B }}</td>
+    <td>{{ form.B.errors }}</td>
+    </tr>
+	<tr>
+    <td align="right">V(x)=</td>
+    <td>{{ form.V }}</td>
+    <td>{{ form.V.errors }}</td>
+    </tr>
+	<tr>
+	<td align="right"><input type="radio" name="ptype" value="list" {% if check != 'range'%}checked{%endif%}>Parameter values p=</td>
+	<td>{{form.plist}}</td>
+	<td>{{ form.plist.errors }}</td>
+	</tr>
+	<td align="right"><input type="radio" name="ptype" value="range"{% if check == 'range'%}checked{%endif%}>Parameter values p ranging from</td>
+	<td>{{ form.p1 }} to {{form.p2}}</td>
+	<td>{{ form.p1.errors }}{{ form.p2.errors }}</td>
+	</tr>
+	<tr>
+    <td align="right">e-fold values=</td>
+    <td>{{ form.Nlist }}</td>
+    <td>{{ form.Nlist.errors }}</td>
+    </tr>
+    <tr>
+    <td align="right">Planck TT+lowP 1σ</td>
+    <td>{{ form.Planck_1s }} 2σ {{ form.Planck_2s }}</td>
+    <td>{{ form.Planck_1s.errors }}{{ form.Planck_2s.errors }}</td>
+    </tr>
+	<tr>
+    <td align="right">Planck TT+lowP+BKP 1σ</td>
+    <td>{{ form.Planck_BKP_1s }} 2σ {{ form.Planck_BKP_2s }}</td>
+    <td>{{ form.Planck_BKP_1s.errors }}{{ form.Planck_BKP_2s.errors }}</td>
+    </tr>
+	<tr>
+    <td align="right">Planck TT+lowP+BKP+BAO 1σ</td>
+    <td>{{ form.Planck_BAO_1s }} 2σ {{ form.Planck_BAO_2s }}</td>
+    <td>{{ form.Planck_BAO_1s.errors }}{{ form.Planck_BAO_2s.errors }}</td>
+    </tr>
+</table>
+<p><input type=submit value=Compute></form></p>
+
+<p>
+{% if resultr != None %}
+{% load static %}
+<img src="{{ resultr }}" width=800>
+{% endif %}
+</p>
+<p>
+{% if resultN != None %}
+<img src="{{ resultN }}" width=800>
+{% endif %}
+</p>
+<p>
+{% if resulte != None %}
+<img src="{{ resulte }}" width=800>
+{% endif %}
+</p>
+</center>
